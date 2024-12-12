@@ -1,5 +1,4 @@
 #+HTML:<div align=center><p>
-competitive prog
 * competitive programming
 #+HTML:</div>
 #+HTML:<div align=center>
