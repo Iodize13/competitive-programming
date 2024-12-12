@@ -1,9 +1,9 @@
-#+HTML:<div align=center>
+#+HTML:<div align=center><p>
 
 * competitive programming
+#+HTML:</div>
+#+HTML:<div align=center> <a href="https://img.shields.io/github/last-commit/Iodize13/competitive-programming?style=for-the-badge&labelColor=292324&color=FFB1C8&logoColor=D9E0EE.svg">
 
-
-<a href="https://img.shields.io/github/last-commit/Iodize13/competitive-programming?style=for-the-badge&labelColor=292324&color=FFB1C8&logoColor=D9E0EE.svg">
   <img src="https://img.shields.io/github/last-commit/Iodize13/competitive-programming?style=for-the-badge&labelColor=292324&color=FFB1C8&logoColor=D9E0EE.svg" alt="Last Commit">
 </a>
 
