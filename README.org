@@ -2,16 +2,5 @@
 
 * competitive programming
 #+HTML:</div>
-#+HTML:<div align=center> <a href="https://img.shields.io/github/last-commit/Iodize13/competitive-programming?style=for-the-badge&labelColor=292324&color=FFB1C8&logoColor=D9E0EE.svg">
-
-  <img src="https://img.shields.io/github/last-commit/Iodize13/competitive-programming?style=for-the-badge&labelColor=292324&color=FFB1C8&logoColor=D9E0EE.svg" alt="Last Commit">
-</a>
-
-<a href="https://img.shields.io/github/repo-size/Iodize13/competitive-programming?label=SIZE&style=for-the-badge&labelColor=292324&color=FFB686&logoColor=D9E0EE.svg">
-  <img src="https://img.shields.io/github/repo-size/Iodize13/competitive-programming?label=SIZE&style=for-the-badge&labelColor=292324&color=FFB686&logoColor=D9E0EE.svg" alt="Repo Size">
-</a>
-
-<a href="https://img.shields.io/badge/issues-skill-green?style=for-the-badge&color=CCE8E9&labelColor=292324&logoColor=D9E0EE.svg">
-  <img src="https://img.shields.io/badge/issues-skill-green?style=for-the-badge&color=CCE8E9&labelColor=292324&logoColor=D9E0EE.svg" alt="Issues">
-</a>
+#+HTML:<div align=center><a href="https://img.shields.io/github/last-commit/Iodize13/competitive-programming?style=for-the-badge&labelColor=292324&color=FFB1C8&logoColor=D9E0EE.svg">
 #+HTML:</div>
