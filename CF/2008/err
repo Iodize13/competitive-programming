@@ -1,0 +1,41 @@
+sol.cpp: In member function 'Mod Mod::invert(Mod)':
+sol.cpp:22:20: warning: declaration of 'x' shadows a member of 'Mod' [-Wshadow]
+   22 |                 ll x, y, g = euclid(a.x, mod, x, y);
+      |                    ^
+sol.cpp:15:12: note: shadowed declaration is here
+   15 |         ll x;
+      |            ^
+In file included from /usr/include/c++/15.1.1/bits/stl_tempbuf.h:61,
+                 from /usr/include/c++/15.1.1/bits/stl_algo.h:69,
+                 from /usr/include/c++/15.1.1/algorithm:63,
+                 from /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/stdc++.h:53,
+                 from sol.cpp:1:
+/usr/include/c++/15.1.1/bits/stl_construct.h: In instantiation of 'void std::_Construct(_Tp*, _Args&& ...) [with _Tp = Mod; _Args = {}]':
+/usr/include/c++/15.1.1/bits/stl_uninitialized.h:876:21:   required from 'static _ForwardIterator std::__uninitialized_default_n_1<_TrivialValueType>::__uninit_default_n(_ForwardIterator, _Size) [with _ForwardIterator = Mod*; _Size = long unsigned int; bool _TrivialValueType = false]'
+  876 |             std::_Construct(std::__addressof(*__first));
+      |             ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/15.1.1/bits/stl_uninitialized.h:941:20:   required from '_ForwardIterator std::__uninitialized_default_n(_ForwardIterator, _Size) [with _ForwardIterator = Mod*; _Size = long unsigned int]'
+  939 |       return __uninitialized_default_n_1<__is_trivial(_ValueType)
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  940 |                                          && __can_fill>::
+      |                                          ~~~~~~~~~~~~~~~~
+  941 |         __uninit_default_n(__first, __n);
+      |         ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+/usr/include/c++/15.1.1/bits/stl_uninitialized.h:996:44:   required from '_ForwardIterator std::__uninitialized_default_n_a(_ForwardIterator, _Size, allocator<_Tp2>&) [with _ForwardIterator = Mod*; _Size = long unsigned int; _Tp = Mod]'
+  996 |     { return std::__uninitialized_default_n(__first, __n); }
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+/usr/include/c++/15.1.1/bits/stl_vector.h:2010:36:   required from 'void std::vector<_Tp, _Alloc>::_M_default_initialize(size_type) [with _Tp = Mod; _Alloc = std::allocator<Mod>; size_type = long unsigned int]'
+ 2010 |           std::__uninitialized_default_n_a(this->_M_impl._M_start, __n,
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2011 |                                            _M_get_Tp_allocator());
+      |                                            ~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/15.1.1/bits/stl_vector.h:588:9:   required from 'std::vector<_Tp, _Alloc>::vector(size_type, const allocator_type&) [with _Tp = Mod; _Alloc = std::allocator<Mod>; size_type = long unsigned int; allocator_type = std::allocator<Mod>]'
+  588 |       { _M_default_initialize(__n); }
+      |         ^~~~~~~~~~~~~~~~~~~~~
+sol.cpp:36:20:   required from here
+   36 |     vector<Mod> a(n);
+      |                    ^
+/usr/include/c++/15.1.1/bits/stl_construct.h:133:7: error: no matching function for call to 'Mod::Mod()'
+  133 |       ::new(static_cast<void*>(__p)) _Tp(std::forward<_Args>(__args)...);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated due to -Wfatal-errors.

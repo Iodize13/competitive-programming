@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+#define int long long
+#define sz(x) (int)(x).size()
+#define all(x) (x).begin(), (x).end()
+
+using namespace std;
+
+int tt = 1;
+
+int n, m, k;
+string s;
+
+void sol() {
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin  >> a[i];
+    }
+
+    vector<int> b;
+    for (int i = 0; i < n; i++) {
+    }
+
+    int ans = 0;
+
+    bool ok = true;
+    while(ok) {
+        int last = *prev(a.end());
+        if (last > *b.begin()) {
+            ok = true;
+            a.extract(last);
+            a.insert(last - 1);
+        } else {
+            ok = false;
+        }
+        for (auto &x: a) cerr << x << ' ';
+        cerr <<'\n';
+        for (auto &x: b) cerr << x << ' ';
+        cerr <<'\n';
+        cerr << "last: " << last << '\n';
+
+        int fi = *a.begin();
+        if (fi < *prev(b.end())) {
+            a.extract(fi);
+            a.insert(fi + 1);
+        }
+        for (auto &x: a) cerr << x << ' ';
+        cerr <<'\n';
+        for (auto &x: b) cerr << x << ' ';
+        cerr <<'\n';
+        cerr << "fi: " << fi << '\n';
+        ans++;
+        sleep(1);
+    }
+
+    cout << ans << '\n';
+}
+
+int32_t main() {
+    ios::sync_with_stdio(false), cin.tie(nullptr);
+    int testcase(1);
+    cin >> testcase;
+    while(testcase--) {
+        sol();
+        tt++;
+    }
+    return 0;
+}
+

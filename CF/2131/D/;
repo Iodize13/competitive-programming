@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+#define int long long
+#define sz(x) (int)(x).size()
+#define all(x) (x).begin(), (x).end()
+
+using namespace std;
+
+int tt = 1;
+
+int n, m, k;
+string s;
+vector<vector<int> > adj;
+
+int mx = 1;
+int nx = 0;
+
+void sol() {
+    cin >> n;
+    adj.assign(n,vector<int>() );
+    for (int i = 0; i < n - 1; i++) {
+        int u, v;
+        cin >> u >> v;
+        u--;
+        v--;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    stack<int> st;
+    st.push(0);
+    vector<int> vis(n);
+    vector<int> de(n);
+    while(!st.empty()) {
+        auto cur = st.top();
+        st.pop();
+        if (vis[cur]) continue;
+        vis[cur] = 1;
+        for (auto &next: adj[cur]) {
+            if (sz(adj[next]) == 1) {
+                de[cur]++;
+                if(de[cur] > mx) {
+                    mx = de[cur]
+                }
+            }
+            if (vis[next]) continue;
+            st.push_back(next);
+        }
+    }
+}
+
+int32_t main() {
+    ios::sync_with_stdio(false), cin.tie(nullptr);
+    int testcase(1);
+    cin >> testcase;
+    while(testcase--) {
+        sol();
+        tt++;
+    }
+    return 0;
+}
+
