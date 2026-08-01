@@ -4,8 +4,7 @@ using namespace std;
  
 #define send {ios_base::sync_with_stdio(false);}
 #define help {cin.tie(NULL);}
-// #define int long long
-#define ld double
+#define int long long
 #define sz(x) (int)(x).size()
 const int di[4] = {0, 0, -1, 1};
 const int dj[4] = {-1, 1, 0, 0};
@@ -25,6 +24,7 @@ struct Edge {
 
 void solve() {
 	int N, M, S; cin >> N >> M >> S;
+	const auto inf = numeric_limits<double>::infinity();
 	--S;
 	double V; cin >> V;
 	vector<Edge> edges;
@@ -37,26 +37,20 @@ void solve() {
 		edges.push_back(AB);
 		edges.push_back(BA);
 	}
-	vector<double> d(N, LLONG_MIN);
+	vector<double> d(N, -inf);
 	d[S] = V;
-	for (int i = 0; i < N - 1; i++) {
+	int x;
+	for (int i = 0; i < N; i++) {
+		x = -1;
 		for (Edge e: edges) {
-			if (d[e.a] > LLONG_MIN && d[e.a] - e.com >= 0) {
-			    d[e.b] = max(d[e.b], (d[e.a] - e.com) * e.cost);
-			}
+			if (d[e.a] > -inf && d[e.a] - e.com >= 0)
+				if (d[e.b] < (d[e.a] - e.com) * e.cost) {
+					d[e.b] = min(inf, (d[e.a] - e.com) * e.cost);
+					x = e.b;
+				}
 		}
 	}
-	vector<double> orgD = d;
-	for (Edge e: edges) {
-	    if (d[e.a] > LLONG_MIN && d[e.a] - e.com >= 0) {
-		d[e.b] = max(d[e.b], (d[e.a] - e.com) * e.cost);
-	    }
-	}
-	bool ch = true;
-	for (int i = 0; i < N; i++) {
-		if (d[i] != orgD[i]) ch = false;
-	}
-	cout << (ch ? "NO" : "YES") << '\n';
+	cout << (x == -1 ? "NO" : "YES") << '\n';
 }
  
 int32_t main() {
