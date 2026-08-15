@@ -1,29 +1,53 @@
-// #pragma GCC optimize("O3,unroll-loops")
 #include "bits/stdc++.h"
 
 using namespace std;
 
-#ifdef LOCAL
-#include "debug.h"
-#else
-#define dbg(...) 42
-#endif
 #define send {ios_base::sync_with_stdio(false);}
 #define help {cin.tie(NULL);}
-#define fi first
-#define se second
 #define int long long
-#define ll long long
 #define sz(x) (int)(x).size()
-#define all(x) (x).begin(), (x).end()
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
-typedef vector<int> vi;
-typedef pair<int, int> pii;
-void solve();
-const int di[4] = {0, 0, -1, 1};
-const int dj[4] = {-1, 1, 0, 0};
-void init();
-map<pair<int, int>, string> mp;
+const int MxM = 1000*10 + 9;
+// const int MxM = 15;
+vector<vector<int> > dp(MxM + 1, vector<int>(MxM + 1, -1));
+vector<int> last(MxM + 1);
+
+void init() {
+	dp[0][0] = 0;
+	for (int i = 0; i < MxM; i++) {
+		for (int j = i; j <= MxM; j++) {
+			for (int k = 1; k < 10; k++) {
+				if (i + k <= MxM && j + k * k <= MxM && dp[i][j] != -1) {
+					dp[i + k][j + k * k] = k;
+					// cerr << "i+k, j+k*k: " << i+k << ", " << j+k*k << ", " << k <<'\n';
+					last[i + k] = max(last[i + k], j + k * k);
+				}
+			}
+		}
+	}
+	// for (int i = 0; i < MxM; i++) {
+	// 	for (int j = 0; j < MxM; j++) cout << dp[i][j];
+	// 	cerr << '\n';
+	// }
+}
+
+void solve() {
+	int s1, s2; cin >> s1 >> s2;
+	// why this doesn't runtime error?
+	if (dp[s1][s2] == -1) {
+		cout << "No solution.\n";
+		return;
+	} else {
+		int i = s1, j = s2;
+		while(dp[i][j]) {
+			// cerr << "i, j: " << i << ", " << j << '\n';
+			cout << dp[i][j];
+			int cur = dp[i][j];
+			i -= cur;
+			j -= cur * cur;
+		}
+		cout << '\n';
+	}
+}
 
 int32_t main() {
     send help
@@ -34,25 +58,3 @@ int32_t main() {
     while (tt--) solve();
 }
 
-void solve() {
-    int s0, s1;
-    cin >> s0 >> s1;
-    cout << (mp.count(make_pair(s0, s1)) ? mp[make_pair(s0, s1)] : "No solution") << '\n';
-}
-
-void init() {
-    queue<pair<string, int> > que;
-    for (int i = 1; i < 10; i++) {
-        que.push(to_string(i));
-    }
-
-    while(!que.empty()) {
-        auto [cur, cost] = que.front();
-        que.pop();
-        // dbg(cur);
-        if (sz(cur) ||  >= 100) continue;
-        rep(i, cur[sz(cur) - 1] - '0',10) {
-            que.push({cur + to_string(i), cost + i});
-        }
-    }
-}
