@@ -45,7 +45,7 @@ void solve() {
 		for (int l = 0; l < cur; l++) { 
 			// cerr << "i, j: " << i << ", " << j << '\n';
 			for (int k = 1; k <= 9; k++) {
-				if (i - k >= 0 && j - k * k >= 0 && (dp[i - k][j - k * k] <= dp[i][j] - 1)) {
+				if (i - k >= 0 && j - k * k >= 0 && (dp[i - k][j - k * k] == dp[i][j] - 1)) {
 					ans += char(k + '0');
 					i -= k;
 					j -= k * k;
