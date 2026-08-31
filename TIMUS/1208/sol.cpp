@@ -36,7 +36,6 @@ void solve() {
 		}
 		if (top[1] == 0) {
 			bool ok = true;
-			top[1]++;
 			for (int i = 0; i < 3; i++) {
 				if (find(cur.begin(), cur.end(), A[top[0]][i]) != cur.end()) {
 					ok = false;
@@ -44,19 +43,21 @@ void solve() {
 				}
 			}
 			if (!ok) {
+				top[1] = 2;
 				continue;
+			} else {
+				top[1] = 1;
 			}
 			for (int i = 0; i < 3; i++) {
 				cur.push_back(A[top[0]][i]);
 			}
 			st.push({top[0] + 1, 0, top[2] + 1});
-			vis[top[0]] = true;
 		} else if (top[1] == 1) {
 			// have problem when never push
-			if (vis[top[0]]) 
-				for (int i = 0; i < 3; i++) cur.pop_back();
+			for (int i = 0; i < 3; i++) cur.pop_back();
 
-			vis[top[0]] = false;
+			top[1]++;
+		} else if (top[1] == 2) {
 			st.push({top[0] + 1, 0, top[2]});
 			top[1]++;
 		} else {
