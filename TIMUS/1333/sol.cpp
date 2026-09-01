@@ -1,100 +1,43 @@
-// #pragma GCC optimize("O3,unroll-loops")
 #include "bits/stdc++.h"
 
 using namespace std;
 
-#ifdef LOCAL
-#include "debug.h"
-#else
-#define dbg(...) 42
-#endif
 #define send {ios_base::sync_with_stdio(false);}
 #define help {cin.tie(NULL);}
-#define f first
-#define s second
 #define int long long
-#define ll long long
 #define sz(x) (int)(x).size()
-#define all(x) (x).begin(), (x).end()
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
-typedef vector<int> vi;
-typedef pair<int, int> pii;
-const int di[4] = {0, 0, -1, 1};
-const int dj[4] = {-1, 1, 0, 0};
 
 
 
-const bool TC = 0;
 void solve() {
-    int n;
-    cin >> n;
-    const int N = 1000;
-    vector<vi> g(N, vi(N));
-    vector<array<int, 3> > a(n);
-    auto ll_round = [&](string x) -> int {
-        int e = 1;
-        rep(i,0,max(3 - sz(x), 0ll)) {
-            e *= 10;
-        }
-        dbg("e: %lld", e);
-
-        int base = stol(x.substr(0,3)) * e;
-        if (sz(x) >= 4) base += x[3] >= 5 + '0' ? 1 : 0;
-        return base;
-    };
-
-    rep(i,0,n) {
-        string xx, yy, rr;
-        cin >> xx >> yy >> rr;
-        if (xx.find('.') == string::npos) {
-            a[i][0] = stoll(xx) * N;
-        } else {
-            string x = xx.substr(xx.find('.') + 1);
-            a[i][0] = ll_round(x);
-        }
-        if (yy.find('.') == string::npos) {
-            a[i][1] = stoll(yy) * N;
-        } else {
-            string y = yy.substr(yy.find('.') + 1);
-            a[i][1] = ll_round(y);
-        }
-        if (rr.find('.') == string::npos) {
-            a[i][2] = stoll(rr) * N;
-        } else {
-            string r = rr.substr(rr.find('.') + 1);
-            a[i][2] = ll_round(r);
-        }
-    }
-    // 1 100
-    // 2 10 0.05 
-    // 3 1
-    // 4 0 0.0005 round up
-
-    rep(k,0,n) {
-        rep(i,0,N) {
-            rep(j,0,N) {
-                if (g[i][j]) continue;
-                int x0 = j - a[k][0];
-                int y0 = i - a[k][1];
-                if (x0 * x0 + y0 * y0 <= a[k][2] * a[k][2]) g[i][j] = 1;
-            }
-        }
-    }
-
-    int ans = 0;
-    rep(i,0,N) {
-        rep(j,0,N) {
-            ans += g[i][j];
-        }
-    }
-
-    cout << setprecision(12) << fixed << ans / 1000'0.l << '\n';
+	int N; cin >> N;
+	struct point {
+		int x, y, r;
+		bool inside(int i, int j) {
+			return (i - x) * (i - x) + (j - y) * (j - y) <= r * r;
+		}
+	};
+	vector<point> A;
+	for (int i = 0; i < N; i++) {
+		long double x, y, r; cin >> x >> y >> r;
+		A.push_back({x * 200, y * 200, r * 200});
+	}
+	long double cnt = 0;
+	for (int i = 0; i < 200; i++) {
+		for (int j = 0; j < 200; j++) {
+			for (int k = 0; k < N; k++) {
+				if (A[k].inside(i, j)) {
+					cnt++;
+					break;
+				}
+			}
+		}
+	}
+	cout << fixed << setprecision(1) << (cnt / 200 / 200 * 100) << '\n';
 }
 
 int32_t main() {
     send help
 
-    int tt = 1;
-    if (TC) cin >> tt;
-    while (tt--) solve();
+    solve();
 }
