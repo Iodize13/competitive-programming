@@ -1,0 +1,66 @@
+01 | n=5      k=7           answer=4        | Sample 1 from the statement
+02 | n=4      k=10          answer=3        | Sample 2 from the statement
+03 | n=3      k=15          answer=0        | Sample 3 from the statement (already zero contrast)
+04 | n=2      k=3           answer=96       | Sample 4 from the statement (budget far too small)
+05 | n=1      k=0           answer=0        | n=1 with k=0, smallest legal input
+06 | n=1      k=1000000000  answer=0        | n=1 with max k and max value
+07 | n=2      k=0           answer=999999   | n=2, zero budget, widest possible spread
+08 | n=2      k=999999      answer=0        | n=2, budget exactly enough to reach contrast 0
+09 | n=2      k=999998      answer=1        | n=2, one unit short of contrast 0 -> answer 1
+10 | n=2      k=1000000000  answer=0        | n=2, budget far exceeds what is needed
+11 | n=4      k=0           answer=0        | All values equal, k=0
+12 | n=5      k=0           answer=8        | k=0 on distinct values -> answer is raw max-min
+13 | n=2      k=1           answer=2        | Odd gap with tiny budget (integer/rounding check)
+14 | n=2      k=2           answer=1        | Odd gap, budget reaches contrast 1
+15 | n=2      k=3           answer=0        | Odd gap, budget reaches contrast 0
+16 | n=4      k=3           answer=6        | Three tubes at the low end: pulling the single max is cheaper
+17 | n=4      k=3           answer=6        | Mirror image: pushing the single min is cheaper
+18 | n=21     k=100         answer=899      | 20 tubes vs 1 far outlier: move the outlier, not the crowd
+19 | n=21     k=100         answer=899      | Mirrored crowd/outlier case
+20 | n=6      k=7           answer=7        | Even split, budget not divisible by group size
+21 | n=6      k=11          answer=6        | Same shape, leftover budget after an even split
+22 | n=3      k=4           answer=1        | Optimal window's LEFT edge is not any input value
+23 | n=6      k=3           answer=15       | Optimal left edge off-array, sparse low tail
+24 | n=6      k=15          answer=7        | Optimal left edge off-array, with duplicates
+25 | n=6      k=2           answer=18       | Optimal window's RIGHT edge is not any input value
+26 | n=5      k=14          answer=3        | Optimal right edge off-array
+27 | n=5      k=8           answer=16       | Optimal right edge off-array, duplicated ends
+28 | n=3      k=400         answer=100      | Scaled-up off-array left edge
+29 | n=5      k=1400        answer=300      | Scaled-up off-array right edge
+30 | n=3      k=1000000000  answer=0        | Small n, huge spread, budget makes contrast 0 easy
+31 | n=7      k=90          answer=0        | Budget exactly equals the cost of full collapse -> 0
+32 | n=7      k=89          answer=1        | One unit below the full-collapse cost
+33 | n=35     k=400         answer=820      | Two clusters of unequal size, budget favours the small one
+34 | n=35     k=400         answer=820      | Same clusters, mirrored sizes
+35 | n=4      k=1000000     answer=499999   | Flat cost region (balanced ends) at large scale
+36 | n=4      k=4           answer=0        | Even n: collapse cost exactly equals k -> 0
+37 | n=4      k=3           answer=1        | Even n: one unit below the collapse cost -> 1
+38 | n=1000   k=0           answer=999      | Sorted ascending 1..1000, k=0
+39 | n=1000   k=50000       answer=553      | Sorted ascending 1..1000, mid budget
+40 | n=1000   k=250000      answer=0        | Strictly DESCENDING input (input is not pre-sorted)
+41 | n=500    k=12345       answer=0        | Random small values, mid budget
+42 | n=1000   k=1000000000  answer=0        | Random wide values, large budget
+43 | n=1000   k=5000000     answer=896864   | Heavy tail: dense low cluster plus far scattered outliers
+44 | n=2000   k=10000000    answer=0        | Tight Gaussian cluster, budget large relative to spread
+45 | n=100000 k=0           answer=0        | n=1e5 all equal, k=0
+46 | n=100000 k=1000000000  answer=0        | n=1e5 all at max value, max k
+47 | n=100000 k=0           answer=999992   | n=1e5 uniform random, k=0
+48 | n=100000 k=1           answer=999966   | n=1e5 uniform random, k=1
+49 | n=100000 k=1000000000  answer=799151   | n=1e5 uniform random, max k
+50 | n=100000 k=500000000   answer=856830   | n=1e5 uniform random, half budget
+51 | n=100000 k=0           answer=999999   | n=1e5 split between the two extremes, k=0
+52 | n=100000 k=1000000000  answer=979999   | n=1e5 extremes split, max k -- total cost ~5e10 OVERFLOWS 32-bit
+53 | n=100000 k=1000000000  answer=0        | n=1e5, one lone low outlier, max k (cheap fix, 64-bit sums)
+54 | n=100000 k=999999      answer=0        | Lone outlier, budget exactly enough -> 0
+55 | n=100000 k=999998      answer=1        | Lone outlier, one unit short -> 1
+56 | n=100000 k=1000000000  answer=0        | n=1e5, one lone high outlier, max k (drag the outlier, not the crowd)
+57 | n=100000 k=1000000000  answer=800623   | n=1e5 pre-sorted ascending, max k
+58 | n=100000 k=1000000000  answer=799919   | n=1e5 pre-sorted descending, max k
+59 | n=100000 k=0           answer=1        | n=1e5 of only 1s and 2s, k=0 -> 1
+60 | n=100000 k=1000000000  answer=979992   | n=1e5 from four extreme buckets, max k
+61 | n=100000 k=1000000000  answer=0        | n=1e5 in a narrow high band, max k -> 0
+62 | n=100000 k=1000000000  answer=557159   | n=1e5 log-uniform (geometric) spread, max k
+63 | n=100000 k=300000000   answer=993000   | n=1e5 bimodal, budget between the two clusters' costs
+64 | n=99999  k=1000000000  answer=800232   | n=99999 (odd count) uniform random, max k
+65 | n=100000 k=1000000000  answer=0        | Max n: collapse costs exactly 1e9 = k -> 0 (tightest 64-bit boundary)
+66 | n=100000 k=999999999   answer=1        | Max n: one unit below that boundary -> 1
