@@ -39,7 +39,6 @@ void solve() {
 		if (M == 3) return;
 		if (M == 1) {
 			int X, Y, Z, K; cin >> X >> Y >> Z >> K;
-			int cur = rangeSum(X,Y,Z,X,Y,Z);
 			for (int i = X + 1; i < N; i += i & -i) {
 				for (int j = Y + 1; j < N; j += j & -j) {
 					for (int k = Z + 1; k < N; k += k & -k) {
