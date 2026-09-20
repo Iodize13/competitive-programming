@@ -18,66 +18,35 @@ void solve() {
 		G[u].push_back(v);
 		G[v].push_back(u);
 	}
-	map<int, vector<int> > mp;
-	map<int, vector<pair<int, int> > > want;
-	vector<pair<int, int> > qr;
+	vector<vector<int> > qs(N);
+	vector<int> qd(Q);
 	for (int i = 0; i < Q; i++) {
 		int v, d; cin >> v >> d;
 		--v;
-		qr.push_back({v, d});
-		mp[v].push_back(d);
+		qs[v].push_back(i);
+		qd[i] = d;
 	}
 	vector<bool> vis(N, false);
 	stack<pair<int, int> > st;
-	st.push({0,0});
-	int S = 0, mx = 0;
-	while (!st.empty()) {
-		auto [cdist, node] = st.top();
-		st.pop();
-		if (vis[node]) continue;
-		if (cdist > mx) {
-			// cerr << "mx: " << cdist << ' ' << node << '\n';
-			mx = cdist;
-			S = node;
-		}
-		// cerr << "cdist, node: " << cdist << ' ' << node << '\n';
-		vis[node] = true;
-		for (auto y:G[node]) {
-			st.push({cdist + 1, y});
-		}
-	}
-	map<pair<int,int>, int> res;
+	int S, mx;
+	vector<int> path(N + 1);
+	vector<int> ans(Q);
 	auto dfs = [&]() {
 		mx = 0;
-		// cerr << "S: " << S << '\n';
 		st.push({0, S});
 		vis.assign(N, false);
-		map<int,int> fb;
 		while (!st.empty()) {
 			auto [cdist, node] = st.top();
 			st.pop();
 			if (vis[node]) continue;
-			fb[cdist] = node;
+			path[cdist] = node;
 			if (cdist > mx) {
 				mx = cdist;
 				S = node;
 			}
-			// for (auto y: want[cdist]) {
-			// 	res[make_pair(y.first, cdist - y.second)] = node;
-			// }
-			// if (node == 0) {
-			// 	cerr << "0: " << cdist << '\n';
-			// }
-			for (auto need: mp[node]) {
-				// if ()
-				// doesn't need to handle over need + cdist > N
-				// want[need + cdist].push_back({node, cdist});
-				// if (node == 7) {
-				// 	cerr << "7: " << cdist << ' ' << need << '\n';
-				// }
-				if (fb.count(cdist - need)) {
-					res[make_pair(node, need)] = fb[cdist - need];
-				}
+			for (auto id: qs[node]) {
+				if (qd[id] <= cdist)
+					ans[id] = path[cdist - qd[id]] + 1;
 			}
 			vis[node] = true;
 			for (auto y:G[node]) {
@@ -86,15 +55,12 @@ void solve() {
 			}
 		}
 	};
+	S = 0;
 	dfs();
-	// for (int i = 0; i < Q; i++) {
-	// 	cerr << "qr[i]: " << qr[i].first << ' ' << qr[i].second << '\n';
-	// 	cerr << (res.count(qr[i]) ? res[qr[i]] + 1 : 0) << '\n';
-	// }
 	dfs();
-	// cerr << "second round\n=============\n";
+	dfs();
 	for (int i = 0; i < Q; i++) {
-		cout << (res.count(qr[i]) ? res[qr[i]] + 1 : 0) << '\n';
+		cout << ans[i] << '\n';
 	}
 }
 
