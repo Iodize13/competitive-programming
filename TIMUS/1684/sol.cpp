@@ -35,6 +35,7 @@ void solve() {
 		ans.push_back(combine.substr(i - pi[i] + 1, pi[i]));
 		sum += pi[i];
 		i = i - pi[i];
+		assert(i >= sz(S));
 	}
 	if (sum != sz(T)) {
 		cout << "Yes\n";
