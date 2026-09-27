@@ -37,8 +37,8 @@ void solve() {
 	for (auto &x: A)cin >> x;
 	int top = 0;
 	st[top++] = {1, 1, 0};
-	vector<int> mx = {	7, 3, 3, 2, 2, 2,
-						1, 1, 1, 1, 1, 1};
+	vector<int> mx = {	9, 5, 3, 4, 3, 3,
+						2, 1, 1, 1, 1, 1};
 	const int inf = (int)1e9;
 	int iter = 0;
 	vector<bool> ov(13, false);
