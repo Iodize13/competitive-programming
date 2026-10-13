@@ -10,34 +10,30 @@ using namespace std;
 
 void solve() {
 	int N, K; cin >> N >> K;
-	int tmp = N;
-	N %= K * 2;
-	const int inf = (int)1e18;
-	int center = N - (N - K) * 2;
-	int R = N * N;
-	// cerr << "N, K, R: " << N << ' ' << K << ' ' << R << endl;
-	// cerr << "N > K: " << (N > K) <<'\n';
-	// cerr << "R < (N - K) * (N - K): " << (N - K) * (N - K) << '\n';
-	if (N >= K && (N - K) * (N - K) < R) {
-		R = (N - K) * (N - K);
-		cerr << "case 5" << endl;
+	vector<int> A(N + 1, -1);
+	A[N] = -2;
+	for (int i = N; i >= 0; i--) {
+		if (i >= K && A[i] == -2)
+			A[i - K] = -2;
+		if (i - 2 * (i % K) >= 0 && A[i] == -2)
+			A[i - 2 * (i % K)] = -2;
+		if (i < K && A[i] == -2)
+			A[i] = i * i;
 	}
-	if (N >= K && center * center < R) {
-		R = center * center;
-		cerr << "case 6" << endl;
-	}
-	// R = min({R, (N - K) * (N - K), center < 0 ? inf : center*center});
-	// cerr << "r: " << R << '\n';
-	// cerr << "center: " << center << '\n';
-	cout << R << '\n';
-	cout << (tmp * tmp - R) / K << '\n';
+	// for (int i = 0; i <= N; i++)
+	// 	cerr << A[i] << " \n"[i == N];
+	int ans = (int)1e18;
+	for (int i = 0; i <= N; i++)
+		if (A[i] >= 0)
+			ans = min(ans, A[i]);
+	// cout << ans << '\n';
+	cout << (N * N - ans) / K << '\n';
 }
 
 int32_t main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 
-	int tt; cin >> tt;
-	while (tt--) solve();
+	solve();
 }
 
